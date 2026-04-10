@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PAC-MAN 3D ULTRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════ START / DASHBOARD SCREEN ══════════════ -->
+<div id="start-screen" class="overlay">
+  <div class="dashboard">
+    <div class="dash-header">
+      <div class="title-wrap">
+        <div class="pac-logo-header">
+          <div class="pac-anim-header"></div>
+        </div>
+        <div>
+          <h1 class="game-title">PAC-MAN <span class="accent">3D</span> <span class="ultra">ULTRA</span></h1>
+          <p class="tagline">Eat all dots. Survive the chaos. Rule the maze.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-body">
+      <!-- HIGH SCORES -->
+      <div class="dash-card" id="highscore-card">
+        <h3>🏆 HIGH SCORES</h3>
+        <ol id="hs-list">
+          <li><span class="hs-rank">1</span><span class="hs-name">---</span><span class="hs-score">0</span></li>
+          <li><span class="hs-rank">2</span><span class="hs-name">---</span><span class="hs-score">0</span></li>
+          <li><span class="hs-rank">3</span><span class="hs-name">---</span><span class="hs-score">0</span></li>
+          <li><span class="hs-rank">4</span><span class="hs-name">---</span><span class="hs-score">0</span></li>
+          <li><span class="hs-rank">5</span><span class="hs-name">---</span><span class="hs-score">0</span></li>
+        </ol>
+
+        <h3 style="margin-top:1.2rem">🎖 ACHIEVEMENTS</h3>
+        <div id="achievements-list" class="achievements-grid"></div>
+      </div>
+
+      <!-- CENTER PLAY AREA -->
+      <div class="dash-center">
+        <button id="play-btn" class="btn-play">▶ PLAY</button>
+
+        <div class="level-select">
+          <span>START LEVEL:</span>
+          <div class="lvl-btns" id="lvl-btn-group">
+            <button class="lvl-btn active" data-lvl="0">1</button>
+            <button class="lvl-btn" data-lvl="1">2</button>
+            <button class="lvl-btn" data-lvl="2">3</button>
+            <button class="lvl-btn" data-lvl="3">4</button>
+            <button class="lvl-btn" data-lvl="4">5</button>
+            <button class="lvl-btn" data-lvl="5">6</button>
+            <button class="lvl-btn" data-lvl="6">7</button>
+            <button class="lvl-btn" data-lvl="7">8</button>
+            <button class="lvl-btn" data-lvl="8">9</button>
+            <button class="lvl-btn" data-lvl="9">10</button>
+          </div>
+        </div>
+
+        <!-- ACCESSORIES CUSTOMIZER -->
+        <div class="accessory-panel">
+          <h3>🎨 CUSTOMIZE PAC-MAN</h3>
+          <div class="acc-row">
+            <span class="acc-label">Color:</span>
+            <div class="acc-colors" id="pac-color-select">
+              <div class="acc-color active" data-color="#FFD700" style="background:#FFD700"></div>
+              <div class="acc-color" data-color="#FF4444" style="background:#FF4444"></div>
+              <div class="acc-color" data-color="#00FF88" style="background:#00FF88"></div>
+              <div class="acc-color" data-color="#00CFFF" style="background:#00CFFF"></div>
+              <div class="acc-color" data-color="#FF88FF" style="background:#FF88FF"></div>
+              <div class="acc-color" data-color="#FF8C00" style="background:#FF8C00"></div>
+            </div>
+          </div>
+          <div class="acc-row">
+            <span class="acc-label">Hat:</span>
+            <div class="acc-options" id="pac-hat-select">
+              <button class="acc-opt active" data-hat="none">None</button>
+              <button class="acc-opt" data-hat="cap">🧢 Cap</button>
+              <button class="acc-opt" data-hat="crown">👑 Crown</button>
+              <button class="acc-opt" data-hat="wizard">🎩 Wizard</button>
+              <button class="acc-opt" data-hat="santa">🎅 Santa</button>
+            </div>
+          </div>
+          <div class="acc-row">
+            <span class="acc-label">Eyes:</span>
+            <div class="acc-options" id="pac-eyes-select">
+              <button class="acc-opt active" data-eyes="normal">Normal</button>
+              <button class="acc-opt" data-eyes="angry">😠 Angry</button>
+              <button class="acc-opt" data-eyes="cool">😎 Cool</button>
+              <button class="acc-opt" data-eyes="sleepy">😴 Sleepy</button>
+              <button class="acc-opt" data-eyes="star">⭐ Star</button>
+            </div>
+          </div>
+          <div class="acc-row">
+            <span class="acc-label">Trail:</span>
+            <div class="acc-options" id="pac-trail-select">
+              <button class="acc-opt active" data-trail="none">None</button>
+              <button class="acc-opt" data-trail="sparkle">✨ Sparkle</button>
+              <button class="acc-opt" data-trail="fire">🔥 Fire</button>
+              <button class="acc-opt" data-trail="ice">❄️ Ice</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls-hint">
+          <span><strong>W/↑</strong> Forward</span>
+          <span><strong>A/←</strong> Turn Left</span>
+          <span><strong>D/→</strong> Turn Right</span>
+          <span><strong>S/↓</strong> Reverse</span>
+          <span><strong>SPACE</strong> Power-Up</span>
+        </div>
+      </div>
+
+      <!-- POWER-UPS + THEMES -->
+      <div class="dash-card" id="powerup-card">
+        <h3>⚡ POWER-UPS</h3>
+        <ul class="pu-list">
+          <li><span class="pu-icon speed">💨</span><span>Speed Boost <em>5s</em></span></li>
+          <li><span class="pu-icon invis">👻</span><span>Invisible <em>4s</em></span></li>
+          <li><span class="pu-icon kill">💀</span><span>Ghost Killer <em>6s</em></span></li>
+          <li><span class="pu-icon glue">🕸</span><span>Ghost Glue <em>5s</em></span></li>
+        </ul>
+        <h3 style="margin-top:1rem">🎯 TRAPS</h3>
+        <ul class="pu-list">
+          <li><span class="pu-icon">🌀</span><span>Portals – teleport!</span></li>
+          <li><span class="pu-icon">🌫</span><span>Fog – limited view</span></li>
+          <li><span class="pu-icon">🔦</span><span>Lights Off!</span></li>
+          <li><span class="pu-icon">🪞</span><span>Reversed Controls</span></li>
+          <li><span class="pu-icon">🧱</span><span>Moving Walls</span></li>
+          <li><span class="pu-icon">🚀</span><span>Laser Beams</span></li>
+        </ul>
+        <h3 style="margin-top:1rem">🗺 LEVEL THEMES</h3>
+        <ul class="pu-list theme-list">
+          <li><span>1-2:</span><span>🏙 Neon City</span></li>
+          <li><span>3-4:</span><span>🌿 Jungle Ruins</span></li>
+          <li><span>5-6:</span><span>❄️ Ice Cavern</span></li>
+          <li><span>7-8:</span><span>🔥 Lava Fortress</span></li>
+          <li><span>9-10:</span><span>🌌 Void Space</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ HUD ══════════════ -->
+<div id="hud" style="display:none">
+  <div id="hud-left">
+    <div id="score-box">SCORE <span id="score-val">0</span></div>
+    <div id="level-box">LEVEL <span id="level-val">1</span></div>
+    <div id="theme-box"><span id="theme-val"></span></div>
+  </div>
+  <div id="hud-center">
+    <div id="power-bar-wrap">
+      <div id="power-bar-label">⭐ POWER CHARGE</div>
+      <div id="power-bar-track"><div id="power-bar-fill"></div></div>
+    </div>
+    <div id="active-power"></div>
+  </div>
+  <div id="hud-right">
+    <div id="lives-box"></div>
+    <div id="timer-box">⏱ <span id="timer-val">00:00</span></div>
+    <div id="combo-box" style="display:none">🔥 COMBO x<span id="combo-val">1</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ POWER-UP SELECTOR ══════════════ -->
+<div id="power-menu" style="display:none">
+  <p>Choose Power-Up!</p>
+  <div class="pm-btns">
+    <button class="pm-btn" data-power="speed">💨 SPEED</button>
+    <button class="pm-btn" data-power="invisible">👻 INVISIBLE</button>
+    <button class="pm-btn" data-power="killer">💀 KILLER</button>
+    <button class="pm-btn" data-power="glue">🕸 GLUE</button>
+  </div>
+</div>
+
+<!-- ══════════════ EVENT BANNERS ══════════════ -->
+<div id="event-banner" style="display:none"></div>
+
+<!-- ══════════════ RESPAWN ══════════════ -->
+<div id="respawn-screen" style="display:none" class="overlay">
+  <h2>YOU DIED</h2>
+  <p id="respawn-countdown">Respawning in 3...</p>
+</div>
+
+<!-- ══════════════ GAME OVER ══════════════ -->
+<div id="death-screen" style="display:none" class="overlay">
+  <div class="death-content">
+    <div class="death-ghost-icon">👻</div>
+    <h1>GAME OVER</h1>
+    <p id="final-score">Score: 0</p>
+    <div id="death-achievements" class="inline-achievements"></div>
+    <div id="name-input-wrap">
+      <input id="player-name" type="text" placeholder="Enter your name" maxlength="10"/>
+      <button id="save-score-btn">SAVE SCORE</button>
+    </div>
+    <p class="auto-return-msg">Returning to menu in <span id="death-timer">3</span>s...</p>
+    <button id="retry-btn">↩ TRY AGAIN</button>
+  </div>
+</div>
+
+<!-- ══════════════ WIN ══════════════ -->
+<div id="win-screen" style="display:none" class="overlay">
+  <div class="win-content">
+    <div class="win-stars">⭐⭐⭐</div>
+    <h1>LEVEL CLEAR!</h1>
+    <p id="win-score">Score: 0</p>
+    <p id="win-bonus"></p>
+    <div id="win-achievements" class="inline-achievements"></div>
+    <button id="next-btn">NEXT LEVEL ▶</button>
+  </div>
+</div>
+
+<!-- ══════════════ ACHIEVEMENT POPUP ══════════════ -->
+<div id="achievement-popup" style="display:none">
+  <div class="ach-icon" id="ach-icon">🏆</div>
+  <div class="ach-text">
+    <div class="ach-title">ACHIEVEMENT UNLOCKED!</div>
+    <div class="ach-name" id="ach-name">Speed Demon</div>
+  </div>
+</div>
+
+<!-- ══════════════ MINI MAP LABEL ══════════════ -->
+<div id="mini-map-label">MAP</div>
+
+<script src="three.js"></script>
+<script src="levels.js"></script>
+<script src="ghosts.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
